@@ -1,6 +1,6 @@
 import React from 'react';
 import Parse from 'parse';
-import { Map } from 'immutable';
+import { Map, Record } from 'immutable';
 import {
   Table,
   Divider,
@@ -12,7 +12,7 @@ import {
   PageHeader,
   Modal,
 } from 'antd';
-import { OprandView } from '@widgets';
+import { OperandView } from '@widgets';
 import tableController from './tableController';
 
 const fields = Map({
@@ -71,16 +71,16 @@ const constraints = Map({
   ],
 });
 
-const ClouseQuery = Parse.Object.extend('ClouseQuery');
+const ClauseQuery = Parse.Object.extend('ClauseQuery');
 
-const mainQuery = new Parse.Query(ClouseQuery);
+const mainQuery = new Parse.Query(ClauseQuery);
 
-const filterData = {
+const filterData = new Record({
   op: 'and',
   childs: [],
   mainQuery,
   searchResults: [],
-};
+});
 
 const doNothing = () => {};
 
@@ -161,8 +161,8 @@ const TableView = () => {
           visible={data.dataFilterVisible}
           title="Search"
         >
-          <OprandView
-            deleteOprand={doNothing}
+          <OperandView
+            deleteOperand={doNothing}
             makeMainQuery={makeMainQuery}
             filterData={filterData}
             constraints={constraints}

@@ -7,5 +7,5 @@
  * Copyright (c) 2020 Your Company
  */
 
-export { default as ClouseView } from './ClouseView';
-export { default as OprandView } from './OprandView';
+export { default as ClauseView } from './ClauseView';
+export { default as OperandView } from './OperandView';

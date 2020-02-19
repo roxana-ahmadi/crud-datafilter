@@ -2,11 +2,14 @@ import React from 'react';
 import { Map } from 'immutable';
 import 'antd/dist/antd.css';
 import Parse from 'parse';
-import ClouseView from '../ClouseView';
+import OperandView from '../OperandView';
 
 export default {
   title: 'CRUD-app',
 };
+
+const ClauseQuery = Parse.Object.extend('ClauseQuery');
+const mainQuery = new Parse.Query(ClauseQuery);
 
 const fields = Map({
   name: 'string',
@@ -63,15 +66,18 @@ const constraints = Map({
     'NotIsNull',
   ],
 });
+const filterData = {
+  op: 'and',
+  childs: [],
+  mainQuery,
+  searchResults: [],
+};
 
-const ClouseQuery = Parse.Object.extend('ClouseQuery');
-const query = new Parse.Query(ClouseQuery);
-
-export const Clouse = () => (
-  <ClouseView
-    queryIndex={1}
-    query={query}
-    fields={fields}
+export const Operand = () => (
+  <OperandView
+    filterData={filterData}
     constraints={constraints}
+    fields={fields}
+    operandIndex={2}
   />
 );

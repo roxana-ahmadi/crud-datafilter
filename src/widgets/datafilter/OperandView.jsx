@@ -5,57 +5,57 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Icon, Button, Input, Select, Tree } from 'antd';
-import oprandController from './oprandController';
-import ClouseView from './ClouseView';
+import operandController from './operandController';
+import ClauseView from './ClauseView';
 import filterIcon from './filter-icon';
 
 const InputGroup = Input.Group;
 const { Option } = Select;
 const { TreeNode } = Tree;
 
-const OprandView = props => {
+const OperandView = props => {
   const {
-    addClouse,
+    addClause,
     deleteChild,
-    changeOprand,
-    addOprand,
+    changeOperand,
+    addOperand,
     data,
-  } = oprandController(props);
+  } = operandController(props);
   const {
     fields,
     constraints,
     operandIndex,
-    deleteOprand,
+    deleteOperand,
     makeMainQuery,
   } = props;
 
-  const OprandNode = () => (
+  const OperandNode = () => (
     <InputGroup compact>
-      <Select defaultValue={data.op} onChange={value => changeOprand(value)}>
+      <Select defaultValue={data.op} onChange={value => changeOperand(value)}>
         <Option value="and">And</Option>
         <Option value="or">Or</Option>
       </Select>
-      <Button icon="plus" onClick={() => addClouse()} />
-      <Button onClick={() => addOprand()}>
+      <Button icon="plus" onClick={() => addClause()} />
+      <Button onClick={() => addOperand()}>
         <Icon component={filterIcon} />
       </Button>
-      <Button icon="close" onClick={() => deleteOprand(operandIndex)} />
+      <Button icon="close" onClick={() => deleteOperand(operandIndex)} />
     </InputGroup>
   );
 
   return (
     <Tree defaultExpandAll>
-      <TreeNode title={<OprandNode />}>
+      <TreeNode title={<OperandNode />}>
         {data.childs.map((item, index) => {
           if (item.op && item.childs.length >= 0) {
             return (
               <TreeNode
                 key={index}
                 title={
-                  <OprandView
+                  <OperandView
                     makeMainQuery={makeMainQuery}
                     filterData={item}
-                    deleteOprand={deleteChild}
+                    deleteOperand={deleteChild}
                     constraints={props.constraints}
                     fields={props.fields}
                     operandIndex={index}
@@ -70,8 +70,8 @@ const OprandView = props => {
                 // eslint-disable-next-line react/no-array-index-key
                 key={index}
                 title={
-                  <ClouseView
-                    deleteClouse={deleteChild}
+                  <ClauseView
+                    deleteClause={deleteChild}
                     queryIndex={index}
                     query={item}
                     fields={fields}
@@ -87,15 +87,15 @@ const OprandView = props => {
   );
 };
 
-OprandView.propTypes = {
+OperandView.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
   fields: PropTypes.object.isRequired,
   // eslint-disable-next-line react/forbid-prop-types
   constraints: PropTypes.object.isRequired,
   // eslint-disable-next-line react/forbid-prop-types
   operandIndex: PropTypes.object.isRequired,
-  deleteOprand: PropTypes.func.isRequired,
+  deleteOperand: PropTypes.func.isRequired,
   makeMainQuery: PropTypes.func.isRequired,
 };
 
-export default OprandView;
+export default OperandView;

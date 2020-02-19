@@ -3,7 +3,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, Input, DatePicker, Select, Switch } from 'antd';
-import clouseController from './clouseController';
+import clauseController from './clauseController';
 
 const InputGroup = Input.Group;
 const { Option } = Select;
@@ -27,9 +27,9 @@ const constraintOptions = (constraints, fields, fieldName) => {
   ));
 };
 
-const ClouseView = props => {
-  const { deleteClouse, queryIndex, fields, constraints } = props;
-  const { setFieldName, data, setConstraint, setFieldValue } = clouseController(
+const ClauseView = props => {
+  const { deleteClause, queryIndex, fields, constraints } = props;
+  const { setFieldName, data, setConstraint, setFieldValue } = clauseController(
     props,
   );
   const jSonQuery = props.query.toJSON();
@@ -90,14 +90,14 @@ const ClouseView = props => {
         {generateInputByType(
           fields.get(Object.keys(jSonQuery.where)[0] || data.fieldName),
         )}
-        <Button icon="close" onClick={() => deleteClouse(queryIndex)} />
+        <Button icon="close" onClick={() => deleteClause(queryIndex)} />
       </span>
     </InputGroup>
   );
 };
 
-ClouseView.propTypes = {
-  deleteClouse: PropTypes.func.isRequired,
+ClauseView.propTypes = {
+  deleteClause: PropTypes.func.isRequired,
   queryIndex: PropTypes.number.isRequired,
   // eslint-disable-next-line react/forbid-prop-types
   fields: PropTypes.object.isRequired,
@@ -107,4 +107,4 @@ ClouseView.propTypes = {
   query: PropTypes.object.isRequired,
 };
 
-export default ClouseView;
+export default ClauseView;

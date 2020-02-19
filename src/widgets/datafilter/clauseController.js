@@ -110,7 +110,7 @@ const init = props =>
     jsonq: props.query.toJSON(),
   });
 
-const clouseController = pipe(
+const clauseController = pipe(
   withState(props => init(props), 'data', 'setData'),
   withHandlers({
     setFieldValue,
@@ -119,4 +119,4 @@ const clouseController = pipe(
   }),
 );
 
-export default clouseController;
+export default clauseController;

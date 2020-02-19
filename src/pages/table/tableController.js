@@ -3,17 +3,17 @@ import Parse from 'parse';
 import { Record } from 'immutable';
 import { withState, withHandlers, pipe, withLifeCycle } from '@js';
 
-const ClouseQuery = Parse.Object.extend('ClouseQuery');
+const ClauseQuery = Parse.Object.extend('ClauseQuery');
 
 const onCreate = ({ setData }) => {
-  const query = new Parse.Query('ClouseQuery');
+  const query = new Parse.Query('ClauseQuery');
   query.find().then(result => {
     setData(d => d.set('personsList', result));
   });
 };
 
 const addPerson = ({ data, setData }) => () => {
-  const obj = new Parse.Object('ClouseQuery');
+  const obj = new Parse.Object('ClauseQuery');
   obj
     .save({
       name: data.personName,
@@ -34,7 +34,7 @@ const setPersonName = ({ setData }) => personName => {
 
 const deletePerson = ({ setData, data }) => index => {
   const selectedPerson = data.personsList[index];
-  const query = new Parse.Query('ClouseQuery');
+  const query = new Parse.Query('ClauseQuery');
   query.get(selectedPerson.id).then(response => {
     response.destroy().then(() =>
       setData(d =>
@@ -48,7 +48,7 @@ const deletePerson = ({ setData, data }) => index => {
 };
 
 const makeMainQuery = ({ setData }) => oprandData => {
-  let mainQuery = new Parse.Query(ClouseQuery);
+  let mainQuery = new Parse.Query(ClauseQuery);
   if (oprandData.op === 'and') {
     oprandData.childs.map(item => {
       if (!item.childs) {
@@ -91,7 +91,7 @@ const editPerson = ({ data, setData }) => index => {
 };
 
 const confirmEdit = ({ setData, data }) => () => {
-  const query = new Parse.Query('ClouseQuery');
+  const query = new Parse.Query('ClauseQuery');
   query.get(data.selectedPersonId).then(response => {
     response
       .save({
